@@ -8,120 +8,97 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
   <style>
-  /* === Theming ========================================================== */
-  :root{
-    --bg:#0b0f14;--surface:#0e1520;--card:#111a27;--muted:#9fb2c6;--text:#e8f0f8;--subtext:#cfe2f3;
-    --brand:#6ec1ff;--brand-2:#9fffcb;--ring:#22364f;--border:#1a2738;--shadow:rgba(0,0,0,.28)
-  }
-  [data-theme="light"]{
-    --bg:#f6f9fc;--surface:#ffffff;--card:#ffffff;--muted:#5a6b7c;--text:#0e1726;--subtext:#2c3e50;
-    --brand:#2563eb;--brand-2:#06b6d4;--ring:#c7d2fe;--border:#e5e7eb;--shadow:rgba(2,6,23,.1)
-  }
+    :root{--bg:#0b0f14;--surface:#0e1520;--card:#121a27;--border:#1a2738;--muted:#9ab0c6;--brand:#76c3ff;--brand-2:#9fffcb;--text:#e8f0f8}
+    *{box-sizing:border-box}
+    html:focus-within{scroll-behavior:smooth}
+    html,body{height:100%}
+    body{margin:0;font-family:Inter,system-ui,Segoe UI,Roboto,Arial,sans-serif;background:linear-gradient(180deg,#071118,#0b0f14 40%);color:var(--text)}
+    img{max-width:100%;height:auto;display:block}
 
-  /* === Base ============================================================= */
-  *{box-sizing:border-box}
-  html:focus-within{scroll-behavior:smooth}
-  html,body{height:100%}
-  body{margin:0;font-family:Inter,system-ui,Segoe UI,Roboto,Arial,sans-serif;background:linear-gradient(180deg,var(--bg),#0b0f14 40%);color:var(--text)}
-  img{max-width:100%;height:auto;display:block;border-radius:14px}
-  a{color:inherit;text-decoration:none}
+    /* Layout helpers */
+    .container{max-width:1200px;margin-inline:auto;padding:28px 20px}
+    .grid{display:grid;gap:18px}
+    .grid-2{grid-template-columns:repeat(2,minmax(0,1fr))}
+    .grid-3{grid-template-columns:repeat(3,minmax(0,1fr))}
+    @media (max-width:980px){.grid-3{grid-template-columns:repeat(2,minmax(0,1fr))}}
+    @media (max-width:720px){.grid-2,.grid-3{grid-template-columns:1fr}}
 
-  /* === Layout =========================================================== */
-  .container{max-width:1200px;margin-inline:auto;padding:28px 20px}
-  .grid{display:grid;gap:20px}
-  .grid-2{grid-template-columns:repeat(2,minmax(0,1fr))}
-  .grid-3{grid-template-columns:repeat(3,minmax(0,1fr))}
-  @media (max-width:1024px){.grid-3{grid-template-columns:repeat(2,minmax(0,1fr))}}
-  @media (max-width:760px){.grid-2,.grid-3{grid-template-columns:1fr}}
+    /* Header & Nav */
+    header{position:sticky;top:0;background:rgba(11,15,20,.72);backdrop-filter:blur(10px);border-bottom:1px solid #152234;z-index:50}
+    .nav{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:12px 20px}
+    .brand{display:flex;align-items:center;gap:10px;font-weight:800;color:var(--text);text-decoration:none}
+    .brand-logo{inline-size:28px;block-size:28px;border-radius:8px;background:linear-gradient(135deg,var(--brand),var(--brand-2));box-shadow:0 0 0 3px #0a1220}
+    .links{display:flex;gap:14px;flex-wrap:wrap}
+    .links a{color:var(--muted);text-decoration:none;font-weight:600;padding:8px 10px;border-radius:10px}
+    .links a[aria-current="page"], .links a:hover{color:var(--text);background:#0e1a27}
 
-  /* === Header & Nav ===================================================== */
-  header{position:sticky;top:0;background:rgba(11,15,20,.72);backdrop-filter:blur(10px);border-bottom:1px solid var(--border);z-index:60}
-  [data-theme="light"] header{background:rgba(255,255,255,.75)}
-  .nav{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:12px 20px}
-  .brand{display:flex;align-items:center;gap:10px;font-weight:800;color:var(--text)}
-  .brand-logo{inline-size:28px;block-size:28px;border-radius:8px;background:linear-gradient(135deg,var(--brand),var(--brand-2));box-shadow:0 0 0 3px rgba(0,0,0,.18)}
-  .links{display:flex;gap:14px;flex-wrap:wrap}
-  .links a{position:relative;color:var(--muted);font-weight:600;padding:10px 12px;border-radius:10px}
-  .links a:hover{color:var(--text)}
-  .links a::after{content:"";position:absolute;left:12px;right:12px;bottom:6px;height:2px;background:linear-gradient(90deg,var(--brand),var(--brand-2));transform:scaleX(0);transform-origin:right;transition:transform .25s ease}
-  .links a:hover::after{transform-origin:left;transform:scaleX(1)}
-  .links a[aria-current="page"]{color:var(--text);background:color-mix(in oklab,var(--brand) 18%, transparent)}
+    /* Mobile menu */
+    .menu-btn{display:none;appearance:none;background:#0f1b29;border:1px solid #1d2e42;color:var(--text);padding:8px 10px;border-radius:10px}
+    @media (max-width:760px){
+      .menu-btn{display:inline-flex;align-items:center;gap:8px}
+      .links{display:none}
+      .links.open{display:flex;flex-direction:column;gap:10px;padding:12px;border:1px solid #1d2e42;background:#0e1520;border-radius:12px;position:absolute;inset-inline:auto 12px;top:56px}
+    }
 
-  /* Mobile menu */
-  .menu-btn{display:none;appearance:none;background:var(--surface);border:1px solid var(--border);color:var(--text);padding:8px 12px;border-radius:10px}
-  @media (max-width:760px){
-    .menu-btn{display:inline-flex;align-items:center;gap:8px}
-    .links{display:none}
-    .links.open{display:flex;flex-direction:column;gap:10px;padding:12px;border:1px solid var(--border);background:var(--surface);border-radius:12px;position:absolute;inset-inline:auto 12px;top:56px;box-shadow:0 20px 50px var(--shadow)}
-  }
+    /* Sections */
+    section{scroll-margin-top:90px}
+    h1{font-size:clamp(1.8rem,2.5vw,2.6rem);margin:0 0 10px}
+    h2{font-size:clamp(1.2rem,1.8vw,1.6rem);margin:0 0 12px}
+    p,li{line-height:1.6;color:#cfe2f3}
 
-  h1{font-size:clamp(2rem,3.5vw,3rem);margin:0 0 10px}
-  h2{font-size:clamp(1.2rem,2vw,1.6rem);margin:0 0 12px}
-  p,li{line-height:1.7;color:var(--subtext)}
+    /* Cards */
+    .card{background:var(--card);border:1px solid var(--border);border-radius:18px;padding:22px;box-shadow:0 10px 30px rgba(0,0,0,.25);transition:transform .2s ease, box-shadow .2s ease, border-color .2s ease}
+    .card:hover{transform:translateY(-2px);box-shadow:0 14px 36px rgba(0,0,0,.32);border-color:#22364f}
 
-  /* === Card & Interactions ============================================= */
-  .card{background:var(--card);border:1px solid var(--border);border-radius:18px;padding:22px;box-shadow:0 10px 30px var(--shadow);transition:transform .2s ease, box-shadow .2s ease, border-color .2s ease}
-  .card.card--interactive:hover{transform:translateY(-4px);box-shadow:0 22px 50px var(--shadow);border-color:color-mix(in oklab,var(--brand) 30%, var(--border))}
+    .pill{display:inline-block;background:#0f1a25;border:1px solid #223346;border-radius:999px;padding:6px 12px;margin:6px 6px 0 0;color:#b8cbe0;font-size:.95rem}
 
-  .btn{display:inline-flex;align-items:center;gap:8px;background:linear-gradient(135deg,var(--brand),var(--brand-2));color:#06111a;font-weight:800;padding:12px 16px;border-radius:12px;border:none;cursor:pointer;box-shadow:0 8px 22px var(--shadow);transition:transform .15s ease, filter .2s ease}
-  .btn:hover{transform:translateY(-1px);filter:saturate(1.1)}
-  .btn:focus-visible{outline:3px solid var(--brand);outline-offset:2px}
+    /* Buttons */
+    .btn{display:inline-flex;align-items:center;gap:8px;background:linear-gradient(135deg,var(--brand),var(--brand-2));color:#06111a;font-weight:800;text-decoration:none;padding:12px 16px;border-radius:12px;border:none;cursor:pointer}
+    .btn:focus-visible{outline:3px solid var(--brand);outline-offset:2px}
 
-  .pill{display:inline-block;background:color-mix(in oklab,var(--brand) 8%, transparent);border:1px solid var(--border);border-radius:999px;padding:6px 12px;margin:6px 6px 0 0;color:var(--muted);font-weight:600;font-size:.95rem}
+    /* Hero */
+    .hero{display:grid;grid-template-columns:1.3fr .7fr;gap:28px;align-items:stretch}
+    @media (max-width:980px){.hero{grid-template-columns:1fr}}
 
-  /* === Hero ============================================================= */
-  .hero{display:grid;grid-template-columns:1.3fr .7fr;gap:28px;align-items:stretch}
-  .avatar{inline-size:120px;block-size:120px;border-radius:50%;background:linear-gradient(135deg,var(--brand),var(--brand-2));padding:3px}
-  .avatar > span{display:block;inline-size:100%;block-size:100%;border-radius:inherit;background:var(--card)}
-  @media (max-width:980px){.hero{grid-template-columns:1fr}}
+    /* Footer */
+    .footer{color:#9db3c8;font-size:.9rem;border-top:1px solid #16202b;margin-top:28px;padding-top:18px}
 
-  /* === Projects (pro look) ============================================= */
-  .project{position:relative;overflow:hidden}
-  .project .tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
-  .tag{font-size:.8rem;background:color-mix(in oklab,var(--brand) 12%, transparent);border:1px dashed var(--border);padding:4px 8px;border-radius:999px;color:var(--muted)}
-  .project .actions{display:flex;gap:10px;margin-top:12px}
+    /* Helpers */
+    .muted{color:var(--muted)}
+    ul{padding-left:1.1rem}
 
-  /* Hover overlay */
-  .project::before{content:"";position:absolute;inset:0;background:radial-gradient(1200px 400px at var(--x,50%) var(--y,50%), color-mix(in oklab,var(--brand) 18%, transparent), transparent 50%);opacity:0;transition:opacity .25s ease}
-  .project:hover::before{opacity:1}
+    /* Certifications badges */
+    .certs{display:flex;flex-wrap:wrap;gap:12px;margin-top:6px}
+    .cert-item{display:flex;align-items:center;gap:10px;background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:10px 12px}
+    .cert-item img{width:28px;height:28px;border-radius:6px;object-fit:contain;background:#fff}
 
-  /* === Footer =========================================================== */
-  .footer{color:var(--muted);font-size:.95rem;border-top:1px solid var(--border);margin-top:28px;padding-top:18px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
+    /* Reveal-on-scroll animations (respects reduced motion) */
+    @media (prefers-reduced-motion:no-preference){
+      .reveal{opacity:0;transform:translateY(12px);transition:opacity .6s ease, transform .6s ease}
+      .reveal.is-visible{opacity:1;transform:none}
+    }
 
-  /* === Utility ========================================================== */
-  .muted{color:var(--muted)}
-  ul{padding-left:1.1rem}
-
-  /* Reveal-on-scroll (respects reduced motion) */
-  @media (prefers-reduced-motion:no-preference){
-    .reveal{opacity:0;transform:translateY(16px);transition:opacity .6s ease, transform .6s ease}
-    .reveal.is-visible{opacity:1;transform:none}
-  }
-
-  /* Back to top */
-  #backToTop{position:fixed;right:16px;bottom:16px;display:none;border:1px solid var(--border);background:var(--surface);color:var(--text);padding:10px 12px;border-radius:12px;box-shadow:0 10px 30px var(--shadow)}
-  #backToTop.show{display:inline-flex}
-</style>
+    /* Back to top */
+    #backToTop{position:fixed;right:16px;bottom:16px;display:none;border:1px solid #1d2e42;background:#0e1520;color:var(--text);padding:10px 12px;border-radius:12px}
+    #backToTop.show{display:inline-flex}
+  </style>
 </head>
 <body>
   <header>
-  <nav class="nav container" aria-label="Primary">
-    <a class="brand" href="#top"><span class="brand-logo" aria-hidden="true"></span> <span>Quareeb Jimoh</span></a>
-    <div style="display:flex;gap:10px;align-items:center">
+    <nav class="nav container" aria-label="Primary">
+      <a class="brand" href="#top"><span class="brand-logo" aria-hidden="true"></span> <span>Quareeb Jimoh</span></a>
       <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="primaryLinks">Menu ▾</button>
-      <button class="btn" id="themeToggle" aria-pressed="false" title="Toggle theme">Theme</button>
-    </div>
-    <div id="primaryLinks" class="links" role="navigation">
-      <a href="#summary">Summary</a>
-      <a href="#education">Education</a>
-      <a href="#skills">Skills</a>
-      <a href="#projects">Projects</a>
-      <a href="#experience">Experience</a>
-      <a href="#resume">Resume</a>
-      <a href="#contact">Contact</a>
-    </div>
-  </nav>
-</header>
+      <div id="primaryLinks" class="links" role="navigation">
+        <a href="#summary">Summary</a>
+        <a href="#education">Education</a>
+        <a href="#skills">Skills</a>
+        <a href="#projects">Projects</a>
+        <a href="#experience">Experience</a>
+        <a href="#resume">Resume</a>
+        <a href="#contact">Contact</a>
+      </div>
+    </nav>
+  </header>
 
   <main id="top" class="container" tabindex="-1">
     <!-- Summary -->
@@ -160,7 +137,7 @@
     <section id="skills" class="container reveal">
       <div class="card">
         <h2>Skills</h2>
-        <div class="grid">
+        <div class="grid grid-3">
           <div>
             <h3>Programming</h3>
             <ul><li>Java</li><li>C# (.NET)</li><li>Python</li><li>PHP</li><li>SQL</li></ul>
@@ -179,7 +156,20 @@
           </div>
           <div>
             <h3>Certifications</h3>
-            <ul><li>Mohawk College Certifications</li><li>Microsoft Azure Fundamentals</l<li>AWS Certified Practioner</li></ul>
+            <div class="certs">
+              <div class="cert-item">
+                <img src="images.png" alt="Mohawk College" loading="lazy">
+                <span>Mohawk College Certifications</span>
+              </div>
+              <div class="cert-item">
+                <img src="azurelogo.jpg" alt="Microsoft Azure" loading="lazy">
+                <span>Microsoft Azure Fundamentals</span>
+              </div>
+              <div class="cert-item">
+                <img src="aws.jpg.webp" alt="AWS Certified" loading="lazy">
+                <span>AWS Certified Practitioner</span>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -187,28 +177,20 @@
 
     <!-- Projects -->
     <section id="projects" class="container reveal">
-      <div class="card"><h2>Projects</h2>
-  <div class="grid grid-3">
-    <article class="project card card--interactive" onmousemove="this.style.setProperty('--x', event.offsetX+'px'); this.style.setProperty('--y', event.offsetY+'px');">
-      <h3>Drum Kit (A)</h3>
-      <p>Interactive web drum kit that lets users trigger sounds via keyboard or mouse clicks.</p>
-      <div class="tags"><span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">JavaScript</span></div>
-      <div class="actions"><a class="btn" href="#">View</a><a class="btn" href="#">Code</a></div>
-    </article>
-    <article class="project card card--interactive" onmousemove="this.style.setProperty('--x', event.offsetX+'px'); this.style.setProperty('--y', event.offsetY+'px');">
-      <h3>Ticket Scanning App (A)</h3>
-      <p>Java application (JavaFX UI) to validate event tickets and flag invalid entries.</p>
-      <div class="tags"><span class="tag">Java</span><span class="tag">JavaFX</span></div>
-      <div class="actions"><a class="btn" href="#">View</a><a class="btn" href="#">Code</a></div>
-    </article>
-    <article class="project card card--interactive" onmousemove="this.style.setProperty('--x', event.offsetX+'px'); this.style.setProperty('--y', event.offsetY+'px');">
-      <h3>Incident Log Mini‑App</h3>
-      <p>Lightweight CRUD to record incidents with tags and filters; useful for quick reporting.</p>
-      <div class="tags"><span class="tag">HTML</span><span class="tag">Vanilla JS</span></div>
-      <div class="actions"><a class="btn" href="#">View</a><a class="btn" href="#">Code</a></div>
-    </article>
-  </div>
-</div>
+      <div class="card">
+        <h2>Projects</h2>
+        <div class="grid grid-2">
+          <article class="project card">
+            <h3>Drum Kit (A)</h3>
+            <p>Interactive web drum kit that lets users trigger sounds via keyboard or mouse clicks.</p>
+            <ul><li>Built with HTML, CSS, JavaScript</li><li>Event listeners for keyboard/mouse</li><li>Simple, responsive interface</li></ul>
+          </article>
+          <article class="project card">
+            <h3>Ticket Scanning App (A)</h3>
+            <p>Java application (JavaFX UI) to validate event tickets and flag invalid entries.</p>
+            <ul><li>Core Java & JavaFX</li><li>Form input validation</li><li>Clear pass/fail feedback</li></ul>
+          </article>
+        </div>
       </div>
     </section>
 
@@ -216,7 +198,7 @@
     <section id="experience" class="container reveal">
       <div class="card">
         <h2>Experience</h2>
-        <div class="grid">
+        <div class="grid grid-2">
           <div class="card">
             <h3>Federal University of Agriculture — Customer Service & Maintenance Dept. (2020–2021)</h3>
             <ul>
@@ -281,24 +263,11 @@
     <div class="container footer">
       © <span id="y"></span> Quareeb Jimoh. Built for Mohawk Portfolio Assignment using GitHub Pages.
     </div>
-    <button id="backToTop" aria-label="Back to top">↑ Top</button>
-    <button id="backToTop" aria-label="Back to top">↑ Top</button>
-</main>
 
-<script>
-  // Theme toggle with localStorage + prefers-color-scheme
-  (function(){
-    const root = document.documentElement;
-    const saved = localStorage.getItem('theme');
-    if(saved){ root.setAttribute('data-theme', saved); }
-    else if(window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches){
-      root.setAttribute('data-theme','light');
-    }
-    const btn = document.getElementById('themeToggle');
-    const apply = (next) => { root.setAttribute('data-theme', next); localStorage.setItem('theme', next); btn.setAttribute('aria-pressed', String(next==='light')); };
-    btn?.addEventListener('click', ()=>{ const cur = root.getAttribute('data-theme')==='light'?'dark':'light'; apply(cur); });
-  })();
+    <button id="backToTop" aria-label="Back to top">↑ Top</button>
+  </main>
 
+  <script>
   // Mobile menu toggle
   const menuBtn = document.getElementById('menuBtn');
   const links = document.getElementById('primaryLinks');
@@ -306,6 +275,8 @@
     const open = links.classList.toggle('open');
     menuBtn.setAttribute('aria-expanded', String(open));
   });
+
+  // Close menu on link click (mobile)
   links?.querySelectorAll('a').forEach(a => a.addEventListener('click', ()=>{
     if(links.classList.contains('open')){
       links.classList.remove('open');
@@ -313,8 +284,8 @@
     }
   }));
 
-  // Scrollspy (IntersectionObserver)
-  const navLinks = Array.from((document.getElementById('primaryLinks')||document).querySelectorAll('a'));
+  // Scrollspy: highlight active section link
+  const navLinks = Array.from(links?.querySelectorAll('a') || []);
   const sections = navLinks.map(a => document.querySelector(a.getAttribute('href'))).filter(Boolean);
   const setActive = (id) => {
     navLinks.forEach(a => a.removeAttribute('aria-current'));
@@ -326,23 +297,25 @@
   },{rootMargin:'-60% 0px -35% 0px',threshold:0});
   sections.forEach(s=> spy.observe(s));
 
-  // Reveal-on-scroll
+  // Reveal-on-scroll animations
   const reveals = document.querySelectorAll('.reveal');
   const io = new IntersectionObserver((entries)=>{
     entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('is-visible'); io.unobserve(e.target);} });
   },{threshold:0.15});
   reveals.forEach(el=> io.observe(el));
 
-  // Back-to-top
+  // Back to top button
   const toTop = document.getElementById('backToTop');
   window.addEventListener('scroll', ()=>{
     if(window.scrollY > 600){ toTop.classList.add('show'); } else { toTop.classList.remove('show'); }
   });
   toTop?.addEventListener('click', ()=> window.scrollTo({top:0, behavior:'smooth'}));
 
-  // Project hover spotlight follows cursor (CSS variables set inline onmousemove)
-</script>
+  // Respect reduced motion
+  if(window.matchMedia('(prefers-reduced-motion: reduce)').matches){
+    document.querySelectorAll('*').forEach(el=> el.style.scrollBehavior='auto');
+  }
+  document.getElementById('y').textContent=new Date().getFullYear();
+  </script>
 </body>
-</html>
-</html>
 </html>
