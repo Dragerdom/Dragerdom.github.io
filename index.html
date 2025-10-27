@@ -1,69 +1,156 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>YOUR NAME - Portfolio</title>
-<style>
-    body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #f4f7fa; }
-    header { background: #1e293b; color: white; padding: 20px; text-align: center; }
-    nav a { color: white; margin: 0 10px; text-decoration: none; font-weight: bold; }
-    section { padding: 20px; margin: 10px auto; width: 90%; max-width: 900px; background: #fff; border-radius: 10px; }
-    h2 { border-bottom: 2px solid #1e293b; padding-bottom: 8px; }
-    footer { text-align: center; padding: 15px; background: #1e293b; color: #fff; margin-top: 20px; }
-</style>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Quareeb Jimoh – Portfolio</title>
+  <meta name="description" content="Portfolio of Quareeb Jimoh: Mohawk College Software Support student focused on clean, responsive web development." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#0b0f14;--card:#121821;--muted:#98a9bc;--brand:#76c3ff;--text:#e6eef6;--ring:#1f2a36;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{margin:0;font-family:Inter,system-ui,Segoe UI,Roboto,Arial,sans-serif;background:linear-gradient(180deg,#071118,#0b0f14 40%)}
+    header{position:sticky;top:0;background:rgba(11,15,20,.7);backdrop-filter:blur(8px);border-bottom:1px solid #172231;z-index:50}
+    nav{max-width:1100px;margin:auto;display:flex;gap:18px;align-items:center;justify-content:space-between;padding:12px 20px}
+    nav a{color:var(--muted);text-decoration:none;font-weight:600}
+    nav a:hover, nav a.active{color:var(--brand)}
+    .container{max-width:1100px;margin:0 auto;padding:28px 20px}
+    .hero{display:grid;grid-template-columns:1.3fr .7fr;gap:28px;align-items:center}
+    .card{background:var(--card);border:1px solid #1b2432;border-radius:18px;padding:22px;box-shadow:0 8px 24px rgba(0,0,0,.25)}
+    h1{color:var(--text);font-size:2.2rem;margin:0 0 8px}
+    h2{color:var(--text);font-size:1.4rem;margin:0 0 12px}
+    p,li{color:#cfe2f3;line-height:1.6}
+    .pill{display:inline-block;background:#0f1a25;border:1px solid #223346;border-radius:999px;padding:6px 12px;margin:6px 6px 0 0;color:#b8cbe0;font-size:.95rem}
+    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px}
+    .project h3{margin:.2rem 0 .35rem;color:var(--text)}
+    .project a{color:var(--brand);text-decoration:none}
+    .footer{color:#9db3c8;font-size:.9rem;border-top:1px solid #16202b;margin-top:28px;padding-top:18px}
+    .btn{display:inline-block;background:var(--brand);color:#092032;font-weight:800;text-decoration:none;padding:10px 14px;border-radius:12px}
+    .muted{color:var(--muted)}
+    ul{padding-left:1.2rem}
+    @media (max-width:860px){.hero{grid-template-columns:1fr}}
+  </style>
 </head>
 <body>
-
-<header>
-    <h1>YOUR NAME</h1>
+  <header>
     <nav>
+      <div><a class="active" href="#top">Quareeb Jimoh</a></div>
+      <div style="display:flex;gap:14px;flex-wrap:wrap">
         <a href="#summary">Summary</a>
         <a href="#education">Education</a>
         <a href="#skills">Skills</a>
         <a href="#projects">Projects</a>
         <a href="#resume">Resume</a>
         <a href="#contact">Contact</a>
+      </div>
     </nav>
-</header>
+  </header>
 
-<section id="summary">
-    <h2>Summarizing Statement</h2>
-    <p>Write about yourself here… who you are and what you aim to become.</p>
-</section>
+  <main id="top" class="container">
+    <!-- Summarizing Statement -->
+    <section id="summary" class="hero">
+      <div class="card">
+        <h1>Hi, I’m Quareeb 👋</h1>
+        <p class="muted">Software Support student at Mohawk College focused on practical problem‑solving and clean, responsive UI. I enjoy building small tools that make everyday workflows smoother (fitness tracking, scheduling, simple CRUD apps).</p>
+        <p><b>Summary:</b> I write neat, accessible front‑end code, use Git/GitHub for version control, and learn fast. I’m developing a strong foundation in client‑side programming and customer‑focused support.</p>
+        <a class="btn" href="#projects">See projects ↓</a>
+      </div>
+      <div class="card">
+        <h2>Quick hits</h2>
+        <div>
+          <span class="pill">HTML</span>
+          <span class="pill">CSS</span>
+          <span class="pill">JavaScript</span>
+          <span class="pill">Git & GitHub</span>
+          <span class="pill">Responsive Design</span>
+        </div>
+      </div>
+    </section>
 
-<section id="education">
-    <h2>Education</h2>
-    <p>Mohawk College — Software Support (Year – Present)</p>
-</section>
+    <!-- Education -->
+    <section id="education" class="container">
+      <div class="card">
+        <h2>Education</h2>
+        <ul>
+          <li><b>Mohawk College</b> — Computer Systems Technician – <b>Software Support</b> • <i>Sept 2025 – Present</i><br/>Selected courses: Client‑Side Programming, Web Development Fundamentals, Data/Databases.</li>
+        </ul>
+      </div>
+    </section>
 
-<section id="skills">
-    <h2>Skills</h2>
-    <ul>
-        <li>HTML, CSS, JavaScript</li>
-        <li>Git & GitHub</li>
-        <li>Responsive Web Design</li>
-    </ul>
-</section>
+    <!-- Skills -->
+    <section id="skills" class="container">
+      <div class="card">
+        <h2>Skills</h2>
+        <div class="grid">
+          <div>
+            <h3>Languages</h3>
+            <ul><li>HTML</li><li>CSS</li><li>JavaScript</li></ul>
+          </div>
+          <div>
+            <h3>Tools</h3>
+            <ul><li>Git & GitHub</li><li>VS Code</li><li>Chrome DevTools</li></ul>
+          </div>
+          <div>
+            <h3>Practices</h3>
+            <ul><li>Responsive Web Design</li><li>Debugging</li><li>Team Collaboration</li></ul>
+          </div>
+        </div>
+      </div>
+    </section>
 
-<section id="projects">
-    <h2>Projects</h2>
-    <p>Project titles and short descriptions go here…</p>
-</section>
+    <!-- Projects -->
+    <section id="projects" class="container">
+      <div class="card">
+        <h2>Projects</h2>
+        <div class="grid">
+          <article class="project card">
+            <h3>Smart Gym Tracker</h3>
+            <p>Tracks sets/reps and suggests progressions. Built with HTML/CSS/JS. Focus: clean UI and simple state logic.</p>
+            <ul><li>LocalStorage persistence</li><li>Mobile‑first layout</li><li>Form validation</li></ul>
+            <p><a href="#">Live (placeholder)</a> • <a href="#">Code (placeholder)</a></p>
+          </article>
+          <article class="project card">
+            <h3>Shift Scheduler</h3>
+            <p>Weekly shift planner with availability view for part‑time work.</p>
+            <ul><li>Calendar grid UI</li><li>CSV import/export</li></ul>
+            <p><a href="#">Live (placeholder)</a> • <a href="#">Code (placeholder)</a></p>
+          </article>
+          <article class="project card">
+            <h3>Incident Log Mini‑App</h3>
+            <p>Lightweight CRUD to record incidents with tags and filters; useful for quick reporting.</p>
+            <ul><li>Create/read/update/delete entries</li><li>Tag‑based filtering</li></ul>
+            <p><a href="#">Live (placeholder)</a> • <a href="#">Code (placeholder)</a></p>
+          </article>
+        </div>
+      </div>
+    </section>
 
-<section id="resume">
-    <h2>Resume</h2>
-    <p><a href="resume.pdf" target="_blank">Download Resume</a></p>
-</section>
+    <!-- Resume -->
+    <section id="resume" class="container">
+      <div class="card">
+        <h2>Resume</h2>
+        <p>Download my resume: <a href="resume.pdf">resume.pdf</a> (upload a PDF with this exact name to the repo root).</p>
+      </div>
+    </section>
 
-<section id="contact">
-    <h2>Contact Information</h2>
-    <p>Email: your.email@example.com</p>
-</section>
+    <!-- Contact -->
+    <section id="contact" class="container">
+      <div class="card">
+        <h2>Contact</h2>
+        <p>Email: <a href="mailto:quareeb1234@gmail.com">quareeb1234@gmail.com</a> • Hamilton, ON</p>
+        <p>GitHub: <a href="https://github.com/USERNAME">github.com/USERNAME</a> • LinkedIn: <a href="https://www.linkedin.com/in/YOURHANDLE/">linkedin.com/in/YOURHANDLE</a></p>
+      </div>
+    </section>
 
-<footer>
-    © 2025 YOUR NAME — Portfolio Website
-</footer>
+    <div class="container footer">
+      © <span id="y"></span> Quareeb Jimoh. Built for Mohawk Portfolio Assignment using GitHub Pages.
+    </div>
+  </main>
 
+  <script>document.getElementById('y').textContent=new Date().getFullYear();</script>
 </body>
 </html>
